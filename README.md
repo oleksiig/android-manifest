@@ -1,11 +1,11 @@
-* **Prepare workspace:**
+* **Prepare Android 11 workspace:**
 ```
   $ mkdir ~/mydroid && cd ~/mydroid
 ```
 
 * **Clone manifest and AOSP from Google**
 ```
-  $ repo init -u https://github.com/oleksiig/android-manifest.git -b android-X.X.X_rXX --partial-clone
+  $ repo init -u https://github.com/oleksiig/android-manifest.git -b android-11.0.0_r59 --partial-clone
 ```
 
 * **Sync sources**
@@ -27,8 +27,8 @@
 
 2. Set environment variables
 ```
-  $ export CROSS_COMPILE=~/mydroid/prebuilts/gcc/linux-x86/aarch64/gcc-linaro-X.X.X-XXXX.XX-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
-  $ export BL31=~/mydroid/device/rockchip/bootloaders/rkbin/bin/rk33/rk3399_bl31_vX.XX.elf
+  $ export CROSS_COMPILE=~/mydroid/prebuilts/gcc/linux-x86/aarch64/gcc-linaro-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
+  $ export BL31=~/mydroid/device/rockchip/bootloaders/rkbin/bin/rk33/rk3399_bl31_v1.35.elf
 ```
 2. Build **Uboot**
 ```
@@ -45,7 +45,7 @@
 ```
   Make shure that in the directory (~/mydroid/device/rockchip/bootloaders/rkbin) were created following files:
 ```
-  rk3399_loader_vX.X.X.bin
+  rk3399_loader_v1.25.126.bin
   trust.img
   uboot.img
 ```
@@ -65,8 +65,8 @@
   Following method is used for initial board flashing, and when loader should be updated.
 ```
   $ cd ~/mydroid/device/rockchip/bootloaders/rkbin
-  $ rkdeveloptool db rk3399_loader_vX.X.X.bin
-  $ rkdeveloptool ul rk3399_loader_vX.X.X.bin
+  $ rkdeveloptool db rk3399_loader_v1.25.126.bin
+  $ rkdeveloptool ul rk3399_loader_v1.25.126.bin
   $ rkdeveloptool wl 0x4000 uboot.img
   $ rkdeveloptool wl 0x6000 trust.img
 ```
