@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
 
+  <remote  name="bsp_dev"
+           fetch="https://github.com/oleksiig"
+           pushurl="ssh://git@github.com/oleksiig" />
+
+  <remote  name="rockchip_linux"
+           fetch="https://github.com/rockchip-linux" />
+
   <remote  name="aosp"
            fetch=".."
            review="https://android-review.googlesource.com/" />
@@ -259,7 +266,7 @@
   <project path="external/libcxxabi" name="platform/external/libcxxabi" groups="pdk" />
   <project path="external/libdaemon" name="platform/external/libdaemon" groups="pdk" />
   <project path="external/libdivsufsort" name="platform/external/libdivsufsort" groups="pdk" />
-  <project path="external/libdrm" name="platform/external/libdrm" groups="pdk" />
+<!--  <project path="external/libdrm" name="platform/external/libdrm" groups="pdk" /> -->
   <project path="external/libepoxy" name="platform/external/libepoxy" groups="pdk" />
   <project path="external/libese" name="platform/external/libese" groups="pdk" />
   <project path="external/libevent" name="platform/external/libevent" groups="pdk" />
@@ -827,5 +834,27 @@
   <project path="tools/trebuchet" name="platform/tools/trebuchet" groups="tools,cts,pdk,pdk-cw-fs,pdk-fs" />
 
   <repo-hooks in-project="platform/tools/repohooks" enabled-list="pre-upload" />
+
+  <!-- BSP projects -->
+  <project name="android-rockchip-kernel" path="device/rockchip/kernel" remote="bsp_dev" revision="x3399-android11-5.4.210" group="bsp" />
+  <project name="android-rockchip-uboot" path="device/rockchip/bootloaders/uboot" remote="bsp_dev" revision="v2019.07-android" group="bsp" />
+
+  <project name="android-device-rockchip-common" path="device/rockchip/common" remote="bsp_dev" revision="android-11" group="bsp" />
+  <project name="android-device-rockchip-rockpro64" path="device/rockchip/rockpro64" remote="bsp_dev" revision="android-11" group="bsp" />
+
+  <project name="android-hardware-rockchip-librga" path="hardware/rockchip/librga" remote="bsp_dev" revision="android-11" group="bsp" />
+  <project name="android-hardware-rockchip-libgralloc" path="hardware/rockchip/libgralloc" remote="bsp_dev" revision="android-11" group="bsp" />
+  <project name="android-hardware-rockchip-libhwcomposer" path="hardware/rockchip/libhwcomposer" remote="bsp_dev" revision="android-11" group="bsp" />
+  <project name="android-hardware-rockchip-prebuilts" path="hardware/rockchip/prebuilts" remote="bsp_dev" revision="android-11" group="bsp" />
+  <project name="android-system-core-libsync_vendor" path="hardware/rockchip/libsync_vendor" remote="bsp_dev" revision="main" group="bsp" />
+
+  <!-- BSP external projects -->
+  <project name="rkbin" path="device/rockchip/bootloaders/rkbin" remote="rockchip_linux" revision="master" group="bsp" />
+
+  <!-- Replaced AOSP projects -->
+  <project name="android-platform-external-libdrm" path="external/libdrm" remote="bsp_dev" revision="android-security-11.0.0_r59" group="bsp,sdk" />
+
+  <!-- GCC compiler for Uboot and Kernel builds -->
+  <project name="gcc-linaro-x86_64_aarch64-linux-gnu" path="prebuilts/gcc/linux-x86/aarch64/gcc-linaro-x86_64_aarch64-linux-gnu" groups="bsp,sdk" remote="bsp_dev" revision="main" clone-depth="1" />
 
 </manifest>
