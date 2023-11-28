@@ -1,11 +1,11 @@
-* **Prepare Android 11 workspace:**
+* **Prepare Android 14 workspace for RockPro64:**
 ```
   $ mkdir ~/mydroid && cd ~/mydroid
 ```
 
 * **Clone manifest and AOSP from Google**
 ```
-  $ repo init -u https://github.com/oleksiig/android-manifest.git -b android-11.0.0_r59 --partial-clone
+  $ repo init -u https://github.com/oleksiig/android-manifest.git -b android-14.0.0_r15 --partial-clone --clone-filter=blob:limit=10M
 ```
 
 * **Sync sources**
@@ -17,7 +17,7 @@
 
 ```
    $ source build/envsetup.sh
-   $ lunch <target>
+   $ lunch rockpro64-userdebug
    $ make
 ```
 
@@ -28,12 +28,12 @@
 2. Set environment variables
 ```
   $ export CROSS_COMPILE=~/mydroid/prebuilts/gcc/linux-x86/aarch64/gcc-linaro-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
-  $ export BL31=~/mydroid/device/rockchip/bootloaders/rkbin/bin/rk33/rk3399_bl31_v1.35.elf
+  $ export BL31=~/mydroid/device/rockchip/bootloaders/rkbin/bin/rk33/rk3399_bl31_v1.36.elf
 ```
 2. Build **Uboot**
 ```
   $ cd ~/mydroid/device/rockchip/bootloaders/uboot
-  $ make <target>_defconfig
+  $ make rockpro64-rk3399_defconfig
   $ make
 ```
 3. Prepare bootloader images for flashing: **uboot.img**, **trust.img** and **rk3399_loader_vX.X.X.bin**
@@ -45,7 +45,7 @@
 ```
   Make shure that in the directory (~/mydroid/device/rockchip/bootloaders/rkbin) were created following files:
 ```
-  rk3399_loader_v1.25.126.bin
+  rk3399_loader_v1.30.130.bin (latest current version in the rkbin repository, may vary)
   trust.img
   uboot.img
 ```
@@ -65,8 +65,8 @@
   Following method is used for initial board flashing, and when loader should be updated.
 ```
   $ cd ~/mydroid/device/rockchip/bootloaders/rkbin
-  $ rkdeveloptool db rk3399_loader_v1.25.126.bin
-  $ rkdeveloptool ul rk3399_loader_v1.25.126.bin
+  $ rkdeveloptool db rk3399_loader_v1.30.130.bin
+  $ rkdeveloptool ul rk3399_loader_v1.30.130.bin
   $ rkdeveloptool wl 0x4000 uboot.img
   $ rkdeveloptool wl 0x6000 trust.img
 ```
@@ -105,6 +105,6 @@
   $ fastboot erase frp
   $ fastboot flashall
 ```
- *When flashing become finished, borad will reboot automatically.*
+ *When flashing become finished, board will reboot automatically.*
 
 * **Done**
